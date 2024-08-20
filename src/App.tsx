@@ -31,28 +31,27 @@ function App() {
   };
 
   const columns = {
-    pending: { title: 'Pending', color: '#fbbf24' }, 
-    'in-progress': { title: 'In Progress', color: '#f97316' },
-    staging: { title: 'Staging', color: '#a855f7' },
-    closed: { title: 'Closed', color: '#10b981' }
+    pending: { title: 'Pending', color: '#F9EEAC' }, 
+    'in-progress': { title: 'In Progress', color: '#EE855E' },
+    staging: { title: 'Staging', color: '#E9A1F6' },
+    closed: { title: 'Closed', color: '#9ED385' }
   };
 
   return (
-    <div className='bg-slate-50 h-screen p-6'>
-      <div className="grid grid-cols-4 gap-1 h-full">
+    <div className='bg-brand-gray-100 h-screen p-6'>
+      <div className="max-w-7xl mx-auto grid grid-cols-4 gap-4 h-full">
         {Object.entries(columns).map(([status, { title, color }]) => (
           <div
             key={status}
             id={status}
-            className="p-1"
             onDragOver={(e) => e.preventDefault()}
             onDrop={(e) => handleDrop(e, status)}
           >
-            <div className='pb-1 h-16 pt-px rounded-lg overflow-hidden mb-6' style={{ background: color }}>
-              <div className='group flex items-center justify-between bg-white rounded-lg h-full px-6'>
-                <h2 className={`text-lg font-semibold`}>
+            <div className='pb-1 h-16 p-px rounded-lg overflow-hidden mb-6' style={{ background: color }}>
+              <div className='group flex items-center justify-between bg-white border border-white rounded-lg h-full px-6'>
+                <h2 className={`text-xl font-bold`}>
                   {title}{' '}
-                  <span>
+                  <span className='text-brand-gray'>
                     {tasks.filter((task) => task.status === status).length}
                   </span>
                 </h2>
@@ -71,11 +70,11 @@ function App() {
               </div>
             </div>
             {tasks
-              .filter((task) => task.status === status)
+              .filter((task) => task.status === status)  
               .map((task) => (
                 <div
                   key={task.id}
-                  className={`bg-white p-4 pb-2 rounded-md border-2 border-gray-300 hover:border-purple-800 shadow-md mb-4 active:cursor-grabbing ${
+                  className={`bg-white p-4 pb-2 rounded-md border-2 border-gray-200/60 shadow-sm hover:border-brand-purple mb-4 active:cursor-grabbing ${
                     draggedTaskId === task.id ? 'bg-blue-100' : ''
                   }`}
                   draggable='true'
@@ -83,19 +82,19 @@ function App() {
                   onDragEnd={handleDragEnd}
                 >
                   <div className="mb-2">
-                    <span className="block text-gray-300 text-sm font-medium">FIELD</span>
+                    <span className="block text-brand-gray/50 text-sm">FIELD</span>
                     <div className='flex items-center justify-between'>
-                      <p className='text-lg font-semibold'>{task.title}</p>
+                      <p className='text-lg mt-0.5'>{task.title}</p>
                       <svg xmlns="http://www.w3.org/2000/svg" width={24} height={24} viewBox="0 0 32 32"><path fill="#fff" d="M10 4H22V28H10z" /><path d="M5,4h6V28H5c-2.208,0-4-1.792-4-4V8c0-2.208,1.792-4,4-4Z" fill="#41914d" /><path d="M25,4h6V28h-6c-2.208,0-4-1.792-4-4V8c0-2.208,1.792-4,4-4Z" transform="rotate(180 26 16)" fill="#bf393b" /><path d="M27,4H5c-2.209,0-4,1.791-4,4V24c0,2.209,1.791,4,4,4H27c2.209,0,4-1.791,4-4V8c0-2.209-1.791-4-4-4Zm3,20c0,1.654-1.346,3-3,3H5c-1.654,0-3-1.346-3-3V8c0-1.654,1.346-3,3-3H27c1.654,0,3,1.346,3,3V24Z" opacity=".15" /><path d="M27,5H5c-1.657,0-3,1.343-3,3v1c0-1.657,1.343-3,3-3H27c1.657,0,3,1.343,3,3v-1c0-1.657-1.343-3-3-3Z" fill="#fff" opacity=".2" /></svg>
                     </div>
                   </div>
                   <div className="mb-2">
-                    <span className="block text-gray-300 text-sm font-medium">FIELD</span>
+                    <span className="block text-brand-gray/50 text-sm">FIELD</span>
                     <div className="flex flex-wrap gap-1 mt-2">
                       {task.tags.map((tag) => (
                         <span
                           key={tag}
-                          className="bg-purple-800 text-sm text-white px-2 py-0.5 rounded"
+                          className="bg-brand-purple text-sm text-white px-2 py-0.5 rounded"
                         >
                           {tag}
                         </span>
@@ -103,14 +102,14 @@ function App() {
                     </div>
                   </div>
                   <div className="mb-2">
-                    <span className="block text-gray-300 text-sm font-medium">FIELD</span>
+                    <span className="block text-brand-gray/50 text-sm">FIELD</span>
                     <div className="flex gap-1 mt-2">
                       {task.images.map((img, index) => (
                         <img
                           key={index}
                           src={img}
                           alt="task"
-                          className="w-10 h-10 rounded"
+                          className="w-12 h-12 rounded"
                         />
                       ))}
                     </div>
